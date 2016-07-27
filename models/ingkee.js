@@ -1,9 +1,9 @@
 /**
- * Created by deng on 16-7-24.
+ * Created by hzq on 16-7-27.
  */
-
 var WebSocketClient = require('websocket').client;
-// var source = require('./models/source');
+var upload = require('../upload');
+// var source = require('./source');
 // var rid = "1469582769476266";
 // var slot = 6;
 // var uid = 2;
@@ -11,7 +11,7 @@ var WebSocketClient = require('websocket').client;
 // var iplist;
 // var json = {"b": {"ev": "c.jr"}, "rid": rid, "city": "西安市", "from": "hot"};
 
-function Ingkee(rid,slot,user) {
+function Ingkee(rid, slot, user) {
     this.rid = rid;
     this.slot = slot;
     this.user = user;
@@ -21,11 +21,15 @@ function Ingkee(rid,slot,user) {
 module.exports = Ingkee;
 
 Ingkee.prototype.start = function () {
-    var rid =this.rid;
+    var rid = this.rid;
     var slot = this.slot;
     var user = this.user;
+    var iplist;
+    var reconnectCount = 0;
+    var url;
+    var ts;
     var json = {"b": {"ev": "c.jr"}, "rid": rid, "city": "西安市", "from": "hot"};
-
+    var values = [];
     var client = new WebSocketClient();
 
     client.on('connectFailed', function (error) {
@@ -34,12 +38,16 @@ Ingkee.prototype.start = function () {
 
     client.on('connect', function (connection) {
 
-        console.log('WebSocket Client Connected');
+        console.log('WebSocket Client Connected' + rid);
         connection.on('error', function (error) {
             console.log("Connection Error: " + error.toString());
         });
         connection.on('close', function () {
-            console.log('echo-protocol Connection Closed');
+            if (reconnectCount > 5)
+                return;
+            reconnect();
+            console.log('echo-protocol Connection Closed' + rid);
+
         });
         connection.on('message', function (message) {
             if (message.type === 'utf8') {
@@ -51,27 +59,45 @@ Ingkee.prototype.start = function () {
 
                 switch (ts) {
                     case "1::":
-                        console.log(data);
+                        // console.log(rid+"--roomid--"+data);
                         sendData("3:::" + JSON.stringify(json));
                         break;
                     case "2::":
-                        console.log(data);
+                        // console.log(rid+"--roomid--"+data);
                         sendData("2:::");
                         break;
                     case "3::":
                         var parse = JSON.parse(data.slice(4));
                         if (parse.liveid == json.rid) {
-                            console.log(data);
+                            parse.ctime = new Date().getTime();
+                            // console.log(parse.ms["0"].tp);
+                            try {
+                                if ('like' == parse.ms["0"].tp || 'usernu' == parse.ms["0"].tp) {
+                                    values.push(parse);
+                                }
+                                if (parse.ms["0"].c)
+                                    values.push(parse);
+                            } catch (e) {
+                                console.log(parse.b.c);
+                            }
+
+
+                            if (values.length > 20) {
+                                upload.uploadServe(rid, 'ingkee', values);
+                                values = [];
+                            }
+                            console.log(rid + "--roomid--" + data);
                         }
                         break;
                     case "4::":
-                        console.log(data);
+                        // console.log(rid+"--roomid--"+data);
                         break;
                     case "5::":
-                        console.log(data);
+                        // console.log(rid+"--roomid--"+data);
                         break;
                     case "7::":
-                        console.log(data);
+                        // console.log(rid+"--roomid--"+data);
+                        reconnect();
                         console.log("信息过期鸟,seeyou lala");
                         break;
                     default:
@@ -124,13 +150,13 @@ Ingkee.prototype.start = function () {
             return console.log(err.message);
         }
         iplist = JSON.parse(body);
-        var url = "http://" + iplist.cfg[slot - 1].addr.split('|')[0] + "/socket.io/1/?" + user;
+        url = "http://" + iplist.cfg[slot - 1].addr.split('|')[0] + "/socket.io/1/?" + user;
         //http://60.205.82.8:81/socket.io/1/?lc=3000000000005860&cv=IK2.9.50_Android&cc=TG36011&ua=Meizum2note&uid=150531691&sid=20BrU6jPAikmx7EZSP6A0i0LoWki2RNxhkAdrXEr1BoM9IsVBjPC&devi=867570028396103&imsi=460026208089352&imei=867570028396103&icc=898600f2261478202497&conn=WIFI&vv=1.0.3-2016060211417.android&aid=caf33cfb45b6cd66&osversion=android_22&proto=4&smid=DuRCYMJK7iW%2BsDMckPgAXpsIRqhtVX0LftNnFOymKTNUnHwA9%2F0COYdTgdEiGrNGcojZSgBQPQStfvxmVPjaX5Cw&city=%E8%A5%BF%E5%AE%89%E5%B8%82
         request(url, function (error, response, body) {
             if (error) {
                 return console.log(error.message);
             }
-            var ts = body.slice(0, 20);
+            ts = body.slice(0, 20);
             console.log(ts);
 
             // client.connect("ws://60.205.82.49:81/socket.io/1/websocket/" +ts+
@@ -141,6 +167,11 @@ Ingkee.prototype.start = function () {
         });
         //http://60.205.82.8:81/socket.io/1/websocket/juKcubITomzvOGGgxxra?lc=3000000000005860&cv=IK2.9.50_Android&cc=TG36011&ua=Meizum2note&uid=150531691&sid=20BrU6jPAikmx7EZSP6A0i0LoWki2RNxhkAdrXEr1BoM9IsVBjPC&devi=867570028396103&imsi=460026208089352&imei=867570028396103&icc=898600f2261478202497&conn=WIFI&vv=1.0.3-2016060211417.android&aid=caf33cfb45b6cd66&osversion=android_22&proto=4&smid=DuRCYMJK7iW%2BsDMckPgAXpsIRqhtVX0LftNnFOymKTNUnHwA9%2F0COYdTgdEiGrNGcojZSgBQPQStfvxmVPjaX5Cw&city=%E8%A5%BF%E5%AE%89%E5%B8%82
     });
-}
+    function reconnect() {
+        reconnectCount++;
+        client.connect("http://" + iplist.cfg[slot - 1].addr.split('|')[0] + "/socket.io/1/websocket/" + ts +
+            "?" + user);
+    }
+};
 
 

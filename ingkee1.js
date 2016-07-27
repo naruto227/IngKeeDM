@@ -1,15 +1,15 @@
 /**
- * Created by deng on 16-7-24.
+ * Created by deng on 16-7-26.
  */
 
 var WebSocketClient = require('websocket').client;
-var source=require('./source');
-var rid = "1469525602923348";
-var slot = 2;
+var source=require('./models/source');
+var rid = "1469610927986369";
+var slot = 6;
 var uid=1;
 var host = "60.205.82.61:81";
 var iplist;
-var json = {"b": {"ev": "c.jr"}, "rid": rid, "city": "西安市", "from": "hot"}
+var json = {"b": {"ev": "c.jr"}, "rid": rid, "city": "西安市", "from": "hot"};
 
 var client = new WebSocketClient();
 
