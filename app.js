@@ -14,6 +14,7 @@ var myEvents = new eventEmitter();
 
 var schedule = require('node-schedule');
 var rule = new schedule.RecurrenceRule();
+var rule1 = new schedule.RecurrenceRule();
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -69,6 +70,7 @@ app.use(function (err, req, res, next) {
 var rooms = [];
 var slots = [];
 var times = [];
+var times1 = [];
 var user = source.source;
 var length = user.length;
 
@@ -77,34 +79,42 @@ myEvents.on("ingkee", function (room, slot, user) {
     new ingkee(room, slot, user);
 });
 
-request('http://service.ingkee.com/api/live/simpleall', function (error, response, body) {
-    if (error) {
-        return console.log(error);
-    }
-    var parse = JSON.parse(body);
-    for (var i = 0; i < length; i++) {
-        var roomId = parse.lives[i].id;
-        var slot = parse.lives[i].slot;
-        rooms.push(roomId);
-        slots.push(slot);
-    }
+rule1.minute = times1;
+for (var i = 0; i < 60; i = i + 30) {
+    times1.push(i);
+}
 
-    rule.second = times;
-    for (var i = 0; i < 60; i+=1) {
-        times.push(i);
-    }
-
-    // console.log("-------------");
-    var count = 0;
-    schedule.scheduleJob(rule, function () {
-        if (count >= rooms.length) {
-            this.cancel();
-            return;
+schedule.scheduleJob(rule1, function () {
+    request('http://service.ingkee.com/api/live/simpleall', function (error, response, body) {
+        if (error) {
+            return console.log(error);
         }
-        myEvents.emit("ingkee", rooms[count], slots[count], user[count].user);
-        count++;
-    });
+        var parse = JSON.parse(body);
+        for (var i = 0; i < length; i++) {
+            var roomId = parse.lives[i].id;
+            var slot = parse.lives[i].slot;
+            rooms.push(roomId);
+            slots.push(slot);
+        }
 
+        rule.second = times;
+        for (var i = 0; i < 60; i += 1) {
+            times.push(i);
+        }
+
+        // console.log("-------------");
+        var count = 0;
+        schedule.scheduleJob(rule, function () {
+            if (count >= rooms.length) {
+                this.cancel();
+                return;
+            }
+            myEvents.emit("ingkee", rooms[count], slots[count], user[count].user);
+            count++;
+        });
+
+    });
 });
+
 
 module.exports = app;

@@ -7,8 +7,8 @@ var request = require("request");
 exports.uploadServe = function (room_id, paltform, data) {
     var options = {
         headers: {"Connection": "close"},
-        url: "http://120.27.94.166:2999/" + "dmLaiFeng" + "?room_id=" + room_id,
-        // url: "http://localhost:2999/" + "dmLaiFeng" + "?room_id=" + room_id,
+        url: "http://120.27.94.166:2999/" + "dmIngkee" + "?room_id=" + room_id,
+        // url: "http://localhost:2999/" + "dmIngkee" + "?room_id=" + room_id,
 
         method: 'POST',
         json: true,

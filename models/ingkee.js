@@ -38,7 +38,7 @@ Ingkee.prototype.start = function () {
 
     client.on('connect', function (connection) {
 
-        console.log('WebSocket Client Connected' + rid);
+        console.log('WebSocket Client Connected');
         connection.on('error', function (error) {
             console.log("Connection Error: " + error.toString());
         });
@@ -46,7 +46,7 @@ Ingkee.prototype.start = function () {
             if (reconnectCount > 5)
                 return;
             reconnect();
-            console.log('echo-protocol Connection Closed' + rid);
+            console.log('echo-protocol Connection Closed');
 
         });
         connection.on('message', function (message) {
@@ -60,11 +60,15 @@ Ingkee.prototype.start = function () {
                 switch (ts) {
                     case "1::":
                         // console.log(rid+"--roomid--"+data);
-                        sendData("3:::" + JSON.stringify(json));
+                        setInterval(function () {
+                            sendData("3:::" + JSON.stringify(json));
+                        }, 45000);
                         break;
                     case "2::":
                         // console.log(rid+"--roomid--"+data);
-                        sendData("2:::");
+                        setInterval(function () {
+                            sendData("2:::");
+                        }, 45000);
                         break;
                     case "3::":
                         var parse = JSON.parse(data.slice(4));
@@ -72,10 +76,10 @@ Ingkee.prototype.start = function () {
                             parse.ctime = new Date().getTime();
                             // console.log(parse.ms["0"].tp);
                             try {
-                                if ('like' == parse.ms["0"].tp || 'usernu' == parse.ms["0"].tp) {
+                                /*if ('like' == parse.ms["0"].tp || 'usernu' == parse.ms["0"].tp) {
                                     values.push(parse);
-                                }
-                                if (parse.ms["0"].c)
+                                }*/
+                                if ('pub'==parse.ms["0"].tp)
                                     values.push(parse);
                             } catch (e) {
                                 console.log(parse.b.c);
@@ -86,7 +90,8 @@ Ingkee.prototype.start = function () {
                                 upload.uploadServe(rid, 'ingkee', values);
                                 values = [];
                             }
-                            console.log(rid + "--roomid--" + data);
+                            console.log(rid);
+                            // console.log(rid + "--roomid--" + data);
                         }
                         break;
                     case "4::":
