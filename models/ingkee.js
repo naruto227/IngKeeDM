@@ -54,7 +54,7 @@ Ingkee.prototype.start = function () {
                 var data = message.utf8Data;
 
 
-                // console.log(data);
+                //console.log(data);
                 var ts = data.slice(0, 3);
 
                 switch (ts) {
@@ -90,8 +90,8 @@ Ingkee.prototype.start = function () {
                                 upload.uploadServe(rid, 'ingkee', values);
                                 values = [];
                             }
-                            console.log(rid);
-                            // console.log(rid + "--roomid--" + data);
+                            //console.log(rid);
+                            //console.log(rid + "--roomid--" + data);
                         }
                         break;
                     case "4::":
