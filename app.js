@@ -82,7 +82,7 @@ myEvents.on("ingkee", function (room, slot, user) {
 });
 
 rule1.hour = times1;
-for (var i = 0; i < 24; i = i + 1) {
+for (var i = 0; i < 24; i = i + 2) {
     times1.push(i);
 }
 schedule.scheduleJob(rule1, function () {
@@ -109,7 +109,7 @@ schedule.scheduleJob(rule1, function () {
             }
 
             rule.second = times;
-            for (var i = 0; i < 60; i += 1) {
+            for (var i = 0; i < 60; i += 2) {
                 times.push(i);
             }
 
