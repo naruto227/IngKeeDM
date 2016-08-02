@@ -86,7 +86,7 @@ Ingkee.prototype.start = function () {
                             }
 
 
-                            if (values.length > 20) {
+                            if (values.length > 100) {
                                 upload.uploadServe(rid, 'ingkee', values);
                                 values = [];
                             }
