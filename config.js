@@ -15,7 +15,7 @@ var config = {
 
     host: "from office",
 
-    topn: 90,
+    topn: 99,
 
    /* db: {
         host: 'localhost',

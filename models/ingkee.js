@@ -102,6 +102,9 @@ Ingkee.prototype.start = function () {
                         break;
                     case "7::":
                         // console.log(rid+"--roomid--"+data);
+                        if (reconnectCount > 5){
+                            return;
+                        }
                         reconnect();
                         console.log("信息过期鸟,seeyou lala");
                         break;
