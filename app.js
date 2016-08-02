@@ -71,7 +71,7 @@ app.use(function (err, req, res, next) {
 var rooms = [];
 var slots = [];
 var times = [];
-var times1 = [];
+//var times1 = [];
 // var user = source.source;
 var users = [];
 var length = 0;
@@ -104,7 +104,7 @@ myEvents.on("ingkee", function (room, slot, user,json) {
 
     });
 
-    console.log('rid=' + room + ' slot=' + slot + ' user=' + user);
+    //console.log('rid=' + room + ' slot=' + slot + ' user=' + user);
     new ingkee(room, slot, user);
 });
 

@@ -55,23 +55,23 @@ Ingkee.prototype.start = function () {
                         sendData("3:::" + JSON.stringify(json));
                         break;
                     case "2::":
-                        console.log(data);
+                        //console.log(data);
                         sendData("2:::");
                         break;
                     case "3::":
                         var parse = JSON.parse(data.slice(4));
                         if (parse.liveid == json.rid) {
-                            console.log(data);
+                            //console.log(data);
                         }
                         break;
                     case "4::":
-                        console.log(data);
+                        //console.log(data);
                         break;
                     case "5::":
-                        console.log(data);
+                        //console.log(data);
                         break;
                     case "7::":
-                        console.log(data);
+                        //console.log(data);
                         console.log("信息过期鸟,seeyou lala");
                         break;
                     default:
