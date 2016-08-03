@@ -71,33 +71,59 @@ app.use(function (err, req, res, next) {
 var rooms = [];
 var slots = [];
 var times = [];
-//var times1 = [];
+var times1 = [];
 // var user = source.source;
 var users = [];
 var length = 0;
 
-myEvents.on("ingkee", function (room, slot, user,json) {
-    json.fans=0;
-    var options = { method: 'GET',
+myEvents.on("ingkee", function (room, slot, user, json) {
+    json.fans = 0;
+    /*var options = { method: 'GET',
         url: 'http://service5.inke.tv/api/user/relation/numrelations',
-        qs: { id: json.owner_id }
-    };
+        qs: { id: json.owner_id },
+        /!*headers:
+        { 'postman-token': '5a30c0a1-9522-de30-2218-abe00a927008',
+            'cache-control': 'no-cache' }*!/ };
 
     request(options, function (error, response, body) {
         if (error) throw new Error(error);
         var parse = JSON.parse(body);
-        json.fans=parse.num_followers;
-        var options = { method: 'POST',
+        json.fans = parse.num_followers;
+        var options = {
+            method: 'POST',
             url: 'http://120.27.94.166:2999/spforIngkee',
-            headers:
-            { 'postman-token': '1791342a-e9cb-8589-6e85-43e5bcb6d91f',
-                'cache-control': 'no-cache',
-                'content-type': 'application/json' },
             body: json,
-            json: true };
+            json: true
+        };
 
         request(options, function (error, response, body) {
             if (error) throw new Error(error);
+
+            console.log(body);
+        });
+        console.log(body);
+    });*/
+
+    var options = {
+        method: 'GET',
+        url: 'http://service5.inke.tv/api/user/relation/numrelations',
+        qs: {id: json.owner_id}
+    };
+
+    request(options, function (error, response, body) {
+        if (error)
+            return console.log(error.message);
+        var parse = JSON.parse(body);
+        json.fans = parse.num_followers;
+        var options = {
+            method: 'POST',
+            url: 'http://120.27.94.166:2999/spforIngkee',
+            body: json,
+            json: true
+        };
+
+        request(options, function (error, response, body) {
+            if (error) return console.log(error.message);
 
             console.log(body);
         });
@@ -108,11 +134,11 @@ myEvents.on("ingkee", function (room, slot, user,json) {
     new ingkee(room, slot, user);
 });
 
-//rule1.hour = times1;
-//for (var i = 0; i < 24; i = i + 2) {
-//    times1.push(i);
-//}
-//schedule.scheduleJob(rule1, function () {
+rule1.hour = times1;
+for (var i = 0; i < 24; i = i + 2) {
+    times1.push(i);
+}
+schedule.scheduleJob(rule1, function () {
     request('http://121.42.176.30:3000/getUsers?num=' + config.topn, function (error, response, body1) {
         if (error) {
             return console.log(error);
@@ -134,15 +160,15 @@ myEvents.on("ingkee", function (room, slot, user,json) {
                 rooms.push(roomId);
                 slots.push(slot);
             }
-            var jsons=[];
+            var jsons = [];
             //{"room_id":"1470147724248188","room_name":"#我是火炬手#  谢谢大家送点火炬金牌谢谢","owner_id":"9515835","nickname":"我沒有胖嘟嘟只是很可愛","online":"18407","fans":"275833"}
             for (var i = 0; i < length; i++) {
-                var json={};
-                json.room_id=parse.lives[i].id;
-                json.room_name=parse.lives[i].name;
-                json.owner_id=parse.lives[i].creator.id;
-                json.nickname=parse.lives[i].creator.id.nick;
-                json.online=parse.lives[i].online_users;
+                var json = {};
+                json.room_id = parse.lives[i].id;
+                json.room_name = parse.lives[i].name;
+                json.owner_id = parse.lives[i].creator.id;
+                json.nickname = parse.lives[i].creator.nick;
+                json.online = parse.lives[i].online_users;
                 jsons.push(json);
             }
             rule.second = times;
@@ -157,13 +183,13 @@ myEvents.on("ingkee", function (room, slot, user,json) {
                     this.cancel();
                     return;
                 }
-                myEvents.emit("ingkee", rooms[count], slots[count], users[count],jsons[count]);
+                myEvents.emit("ingkee", rooms[count], slots[count], users[count], jsons[count]);
                 count++;
             });
 
         });
     });
-//});
+});
 // schedule.scheduleJob(rule1, function () {
 
 // });

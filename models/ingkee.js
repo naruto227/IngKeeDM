@@ -72,6 +72,7 @@ Ingkee.prototype.start = function () {
                         break;
                     case "3::":
                         var parse = JSON.parse(data.slice(4));
+                        // console.log(JSON.stringify(parse));
                         if (parse.liveid == json.rid) {
                             parse.ctime = new Date().getTime();
                             // console.log(parse.ms["0"].tp);
@@ -165,7 +166,7 @@ Ingkee.prototype.start = function () {
                 return console.log(error.message);
             }
             ts = body.slice(0, 20);
-            console.log(ts);
+            // console.log(ts);
 
             // client.connect("ws://60.205.82.49:81/socket.io/1/websocket/" +ts+
             //     "?uid=144559824&place=room&sid=8a4624439c87d7e4d088fbf9a969522286e8e934d55ded46c9e4072cc2d1b867574aadf9bc290fdbf01fbcc014e0ef2981b199474006f1ec&roomid=" +blob+
