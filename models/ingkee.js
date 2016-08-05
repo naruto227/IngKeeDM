@@ -83,7 +83,7 @@ Ingkee.prototype.start = function () {
                                 if ('pub'==parse.ms["0"].tp)
                                     values.push(parse);
                             } catch (e) {
-                                console.log(parse.b.c);
+                                // console.log(parse.b.c);
                             }
 
 
@@ -103,11 +103,13 @@ Ingkee.prototype.start = function () {
                         break;
                     case "7::":
                         // console.log(rid+"--roomid--"+data);
-                        if (reconnectCount > 5){
+                        /*if (reconnectCount > 5){
                             return;
                         }
-                        reconnect();
-                        console.log("信息过期鸟,seeyou lala");
+                        reconnect();*/
+                        console.log("socket 连接关闭");
+                        // console.log("信息过期鸟,seeyou lala");
+                        connection.close();
                         break;
                     default:
                         break;
@@ -127,9 +129,9 @@ Ingkee.prototype.start = function () {
 
         }
 
-        setInterval(function () {
+        /*setInterval(function () {
             sendData();
-        }, 45000);
+        }, 45000);*/
         //function sendNumber() {
         //    if (connection.connected) {
         //        var number = Math.round(Math.random() * 0xFFFFFF);

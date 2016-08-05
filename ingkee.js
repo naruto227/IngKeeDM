@@ -52,11 +52,15 @@ Ingkee.prototype.start = function () {
                 switch (ts) {
                     case "1::":
                         console.log(data);
-                        sendData("3:::" + JSON.stringify(json));
+                        setInterval(function () {
+                            sendData("3:::" + JSON.stringify(json));
+                        }, 45000);
                         break;
                     case "2::":
                         //console.log(data);
-                        sendData("2:::");
+                        setInterval(function () {
+                            sendData("2:::");
+                        }, 45000);
                         break;
                     case "3::":
                         var parse = JSON.parse(data.slice(4));
@@ -71,8 +75,9 @@ Ingkee.prototype.start = function () {
                         //console.log(data);
                         break;
                     case "7::":
-                        //console.log(data);
-                        console.log("信息过期鸟,seeyou lala");
+                        console.log("socket 连接关闭");
+                        // console.log("信息过期鸟,seeyou lala");
+                        connection.close();
                         break;
                     default:
                         break;
@@ -83,7 +88,6 @@ Ingkee.prototype.start = function () {
         function sendData(data) {
             try {
                 if (connection.connected) {
-
                     connection.send((data));
                 }
             } catch (e) {
@@ -92,9 +96,9 @@ Ingkee.prototype.start = function () {
 
         }
 
-        setInterval(function () {
+        /*setInterval(function () {
             sendData();
-        }, 45000);
+        }, 45000);*/
         //function sendNumber() {
         //    if (connection.connected) {
         //        var number = Math.round(Math.random() * 0xFFFFFF);
