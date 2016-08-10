@@ -31,7 +31,6 @@ Ingkee.prototype.start = function () {
     var json = {"b": {"ev": "c.jr"}, "rid": rid, "city": "西安市", "from": "hot"};
     var values = [];
     var client = new WebSocketClient();
-
     client.on('connectFailed', function (error) {
         console.log('Connect Error: ' + error.toString());
     });
