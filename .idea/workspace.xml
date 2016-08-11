@@ -40,10 +40,10 @@
       <file leaf-file-name="app.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/app.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="324">
-              <caret line="138" column="47" selection-start-line="138" selection-start-column="47" selection-end-line="138" selection-end-column="47" />
+            <state relative-caret-position="474">
+              <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
               <folding>
-                <element signature="e#2113#2923#0" expanded="false" />
+                <element signature="e#2116#2926#0" expanded="false" />
               </folding>
             </state>
           </provider>
@@ -728,7 +728,7 @@
       <workItem from="1470621486907" duration="641000" />
       <workItem from="1470821243914" duration="1574000" />
       <workItem from="1470887045671" duration="14000" />
-      <workItem from="1470900262934" duration="1430000" />
+      <workItem from="1470900262934" duration="3090000" />
     </task>
     <task id="LOCAL-00001" summary="data upload">
       <created>1469613605991</created>
@@ -800,11 +800,18 @@
       <option name="project" value="LOCAL" />
       <updated>1470822567481</updated>
     </task>
-    <option name="localTasksCounter" value="11" />
+    <task id="LOCAL-00011" summary="100条上传一次">
+      <created>1470901704162</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1470901704162</updated>
+    </task>
+    <option name="localTasksCounter" value="12" />
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="89990000" />
+    <option name="totallyTimeSpent" value="91650000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="0" y="27" width="1920" height="1173" extended-state="0" />
@@ -856,9 +863,9 @@
     <MESSAGE value="port 300" />
     <MESSAGE value="远程 database" />
     <MESSAGE value="定时start" />
-    <MESSAGE value="100条上传一次" />
     <MESSAGE value="init table" />
-    <option name="LAST_COMMIT_MESSAGE" value="init table" />
+    <MESSAGE value="100条上传一次" />
+    <option name="LAST_COMMIT_MESSAGE" value="100条上传一次" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -917,7 +924,7 @@
         <state relative-caret-position="1404">
           <caret line="78" column="12" selection-start-line="78" selection-start-column="12" selection-end-line="78" selection-end-column="12" />
           <folding>
-            <element signature="e#2113#2923#0" expanded="false" />
+            <element signature="e#2116#2926#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -989,7 +996,7 @@
         <state relative-caret-position="1404">
           <caret line="78" column="13" selection-start-line="78" selection-start-column="13" selection-end-line="78" selection-end-column="13" />
           <folding>
-            <element signature="e#2113#2923#0" expanded="false" />
+            <element signature="e#2116#2926#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1061,7 +1068,7 @@
         <state relative-caret-position="0">
           <caret line="0" column="0" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding>
-            <element signature="e#2113#2923#0" expanded="false" />
+            <element signature="e#2116#2926#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1133,7 +1140,7 @@
         <state relative-caret-position="1548">
           <caret line="86" column="19" selection-start-line="86" selection-start-column="19" selection-end-line="86" selection-end-column="19" />
           <folding>
-            <element signature="e#2113#2923#0" expanded="false" />
+            <element signature="e#2116#2926#0" expanded="false" />
           </folding>
         </state>
       </provider>
@@ -1229,14 +1236,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/bin/www">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="252">
-          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/upload.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="414">
@@ -1287,12 +1286,20 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/bin/www">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="252">
+          <caret line="14" column="50" selection-start-line="14" selection-start-column="50" selection-end-line="14" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/app.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="324">
-          <caret line="138" column="47" selection-start-line="138" selection-start-column="47" selection-end-line="138" selection-end-column="47" />
+        <state relative-caret-position="474">
+          <caret line="207" column="0" selection-start-line="207" selection-start-column="0" selection-end-line="207" selection-end-column="0" />
           <folding>
-            <element signature="e#2113#2923#0" expanded="false" />
+            <element signature="e#2116#2926#0" expanded="false" />
           </folding>
         </state>
       </provider>

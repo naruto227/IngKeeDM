@@ -76,7 +76,7 @@ var times1 = [];
 // var user = source.source;
 var users = [];
 var length = 0;
-var values = [];
+// var values = [];
 
 myEvents.on("ingkee", function (room, slot, user, json) {
     try {
@@ -117,7 +117,7 @@ myEvents.on("ingkee", function (room, slot, user, json) {
                 return console.log(error.message);
             var parse = JSON.parse(body);
             json.fans = parse.num_followers;
-            values.push(json);
+            // values.push(json);
             // if (values.length > 50) {
             var options2 = {
                 method: 'POST',
@@ -129,9 +129,9 @@ myEvents.on("ingkee", function (room, slot, user, json) {
             request(options2, function (error, response, body) {
                 if (error) return console.log(error.message);
 //{ msg: 'spforIngkee success' }
-                console.log(body);
+//                 console.log(body);
             });
-            values = [];
+            // values = [];
             // }
 
         });
@@ -150,7 +150,7 @@ rule1.hour = times1;
 for (var i = 0; i < 24; i = i + 2) {
     times1.push(i);
 }
-// schedule.scheduleJob(rule1, function () {
+schedule.scheduleJob(rule1, function () {
     request('http://121.42.176.30:3000/getUsers?num=' + config.topn, function (error, response, body1) {
         if (error) {
             return console.log(error);
@@ -201,7 +201,7 @@ for (var i = 0; i < 24; i = i + 2) {
 
         });
     });
-// });
+});
 // schedule.scheduleJob(rule1, function () {
 
 // });
