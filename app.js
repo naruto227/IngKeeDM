@@ -118,26 +118,26 @@ myEvents.on("ingkee", function (room, slot, user, json) {
             var parse = JSON.parse(body);
             json.fans = parse.num_followers;
             values.push(json);
-            if (values.length > 50) {
-                var options2 = {
-                    method: 'POST',
-                    url: 'http://120.27.94.166:2999/spforIngkee',
-                    body: json,
-                    json: true
-                };
+            // if (values.length > 50) {
+            var options2 = {
+                method: 'POST',
+                url: 'http://120.27.94.166:2999/spforIngkee',
+                body: json,
+                json: true
+            };
 
-                request(options2, function (error, response, body) {
-                    if (error) return console.log(error.message);
+            request(options2, function (error, response, body) {
+                if (error) return console.log(error.message);
 //{ msg: 'spforIngkee success' }
-                    console.log(body);
-                });
-                values = [];
-            }
+                console.log(body);
+            });
+            values = [];
+            // }
 
         });
         new ingkee(room, slot, user);
-        console.log('init table ' + room);
         upload.uploadServe(room, 'ingkee', []);
+        console.log('init table ' + room);
 
         //console.log('rid=' + room + ' slot=' + slot + ' user=' + user);
     } catch (E) {
@@ -150,7 +150,7 @@ rule1.hour = times1;
 for (var i = 0; i < 24; i = i + 2) {
     times1.push(i);
 }
-schedule.scheduleJob(rule1, function () {
+// schedule.scheduleJob(rule1, function () {
     request('http://121.42.176.30:3000/getUsers?num=' + config.topn, function (error, response, body1) {
         if (error) {
             return console.log(error);
@@ -201,7 +201,7 @@ schedule.scheduleJob(rule1, function () {
 
         });
     });
-});
+// });
 // schedule.scheduleJob(rule1, function () {
 
 // });
