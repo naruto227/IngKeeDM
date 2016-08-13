@@ -7,7 +7,7 @@ var bodyParser = require('body-parser');
 
 var request = require('request');
 var ingkee = require('./models/ingkee');
-var upload = require('./upload');
+// var upload = require('./upload');
 // var source = require('./models/source');
 var config = require('./config');
 
@@ -136,8 +136,8 @@ myEvents.on("ingkee", function (room, slot, user, json) {
 
         });
         new ingkee(room, slot, user);
-        upload.uploadServe(room, 'ingkee', []);
-        console.log('init table ' + room);
+        /*upload.uploadServe(room, 'ingkee', []);
+        console.log('init table ' + room);*/
 
         //console.log('rid=' + room + ' slot=' + slot + ' user=' + user);
     } catch (E) {
