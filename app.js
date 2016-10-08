@@ -150,7 +150,7 @@ rule1.hour = times1;
 for (var i = 0; i < 24; i = i + 2) {
     times1.push(i);
 }
-schedule.scheduleJob(rule1, function () {
+// schedule.scheduleJob(rule1, function () {
     request('http://121.42.176.30:3000/getUsers?num=' + config.topn, function (error, response, body1) {
         if (error) {
             return console.log(error);
@@ -165,9 +165,11 @@ schedule.scheduleJob(rule1, function () {
             for (var i = 0; i < length; i++) {
                 var roomId = parse.lives[i].id;
                 var slot = parse.lives[i].slot;
-                var user = "lc=3000000000005852&cv=IK2.9.50_Android&cc=TG36001&ua=samsungSM-N7508V&uid=" + bodyjs.data[i].uid +
-                    "154010404&sid=" + bodyjs.data[i].session +
-                    "&imsi=&imei=352203065389185&icc=&conn=WIFI&vv=1.0.3-2016060211417.android&aid=c0590722d45ca695&osversion=android_18&proto=4&smid=DuEdLy786y%2B5h9D0%2BOvvHjExiUJ0pOrcnuOkw6HK2riyVnTLWuq%2By4ds8D28Ueyx9%2BRElIe00SnoPSaLz1Zqs0sg&city=%E8%A5%BF%E5%AE%89%E5%B8%82"
+                var user = "lc=3000000000005852&cv=IK3.1.00_Android&cc=TG36001&ua=samsungSM-N7508V&uid=" + bodyjs.data[i].uid +
+                    "&sid=" + bodyjs.data[i].session +
+                    "&imsi=&imei=352203065389185&icc=&conn=WIFI&vv=1.0.3-2016060211417.android&aid=c0590722d45ca695&osversion=android_18&proto=4&smid=DuEdLy786y%2B5h9D0%2BOvvHjExiUJ0pOrcnuOkw6HK2riyVnTLWuq%2By4ds8D28Ueyx9%2BRElIe00SnoPSaLz1Zqs0sg&city=%E8%A5%BF%E5%AE%89%E5%B8%82";
+                // "lc=3000000000008352&cv=IK3.1.00_Android&cc=TG36001&ua=samsungSM-N7508V&uid=150239714&sid=20sPA84LrKSEqAjMEyctoqmnVXQ8mho5cEm2ZIvxUoI6N3AFnJ&devi=352203065389185&imsi=&imei=352203065389185&icc=&conn=WIFI&vv=1.0.3-2016060211417.android&aid=c0590722d45ca695&osversion=android_18&mtid=4d76c65ec64097a5b105f7818443d5d6&mtxid=d0ee0714fcba&proto=4&smid=DuEdLy786y%2B5h9D0%2BOvvHjExiUJ0pOrcnuOkw6HK2riyVnTLWuq%2By4ds8D28Ueyx9%2BRElIe00SnoPSaLz1Zqs0sg"
+                console.log(user);
                 users.push(user);
                 rooms.push(roomId);
                 slots.push(slot);
@@ -201,7 +203,7 @@ schedule.scheduleJob(rule1, function () {
 
         });
     });
-});
+// });
 // schedule.scheduleJob(rule1, function () {
 
 // });
